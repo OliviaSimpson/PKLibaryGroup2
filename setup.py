@@ -49,11 +49,11 @@ setup(
 
     # author_email='',
 
-    maintainer='Martin Robinson',
+    maintainer='Olivia Simpson',
 
-    maintainer_email='martin.robinson@cs.ox.ac.uk',
+    maintainer_email='',
 
-    url='https://github.com/SABS-R3/2020-software-engineering-projects-pk',
+    url='https://github.com/OliviaSimpson/SEGroup2Project',
 
     # Packages to include
     packages=find_packages(include=('pkmodel', 'pkmodel.*')),
