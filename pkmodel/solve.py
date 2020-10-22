@@ -2,7 +2,6 @@
 # Solution class
 #
 import numpy as np
-import matplotlib
 import scipy.integrate
 
 
@@ -49,7 +48,7 @@ class Solution:
             t_span=[t_eval[0], t_eval[-1]],
             y0=self.y0, t_eval=t_eval
             )
-        
+        return [sol.t, sol.y]
         
         
 
