@@ -3,15 +3,15 @@
 #
 
 class Protocol:
-    """A Pharmokinetic (PK) protocol
+    """Specifies the Pharmokinetic protocol required for the model
 
     Parameters
     ----------
 
-    value: numeric, optional
+    protocol: numeric, optional
         an example paramter
 
     """
     def __init__(self, value=43):
-        self.value = value
+        self.value = valu
 

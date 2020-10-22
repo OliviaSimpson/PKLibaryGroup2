@@ -2,11 +2,9 @@
 #A class for specifying the compartments
 #
 
-class Compartments:
-    """Pharmokinetic model: specifies the number of compartments used in
-    the model - this is limited to 1 or 2, but can be extended to many more
-    quite easily
-    
+class Central_Compartment:
+    """Pharmokinetic model: specifies the parameters of the central compartment used in
+    the model - 
     Parameters
     -------------
     
