@@ -54,26 +54,3 @@ class Compartment:
         self.rate = float(params[0])
         self.volume = float(params[1])
         self.type = str(type)
-
-
-model = Model([[0, 1]])
-print(model.v_c)
-
-v_ps = [1,2,3]
-q_ps = [4,5,6]
-
-def make_equation(v_ps, q_ps):
-    peris = []
-    for vi, qi in v_ps, q_ps:
-        peris.append(qi * ())
-
-def rhs(t, y, Q_p1, V_c, V_p1, CL, X):
-    transitions = [] # store the transitions
-    for vi, qi, i in v_ps, q_ps, range(len(v_ps)):
-        transitions.append(qi * (y[0] / V_c - y[i] / vi))
-    dqc_dt = dose(t, X) - q_c / V_c * CL
-    for t in transitions:
-        dqc_dt -= t
-    return transitions.insert(0, dqc_dt)
-
-
