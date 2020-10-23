@@ -9,26 +9,77 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 class plot():
-    def __init__(self, masses=[],times=[]):
+    def __init__(self, masses=[],times=[], t0=0, compatmentNames=[], title="PK Model"):
+        """A class used for the graphical display of PK model results
+        
+        :param masses: a list of values descriping the mass of drug present in each compartment. to provide values for multiple 
+        compatments masses should be 2-dimentional of the form [[list of results for compatment 1], [list of results for compatment 2]]
+        defaults to []
+        :type list: list, optional
+        :param times: TimeSeries corrosponding to the data the data in masses, defaults to having each Y element corrospond to a time step of 1
+        :type times: list, optional
+        :param t0: start point of the time series if time is not explicitly provided in times, defaults to 0.0
+        :type t0: int, optional
+        :param title: Title displayed above graph, defaults to "PK Model"
+        :type title: string, optional
+        :param xunits: units for time on the axis, defaults to ""
+        :type xunits: string, optional
+        :param yunits: units for mass of the drug administered, defaults to ""
+        :type yunits: string, optional
+        :param compatmentNames: list of names for the compatments, defaults to []
+        :type compatmentNames: list(, optional)
+        """
+        self.compatmentNames=compatmentNames
+        self.title=title
+
+        times = self.__makeTimeSeries(times, len(masses), t0=0)
+
         solveData = pd.DataFrame(data = masses, columns=times)
         self.currentData = solveData.transpose()
 
-    def adddata (self,newData=[], newtimeseries=[]):
-        newData = np.array(newData)
 
-        if len(newData.shape) == 1:
-            newData = pd.DataFrame(data = [newData], columns=newtimeseries)
+    def adddata (self,masses=[], Timeseries=[], compatmentNames=[], title="PK Model", show=True):
+        """funciton to add data to the output plot 
+
+        :param masses: a list of values descriping the mass of drug present in each compartment. to provide values for multiple 
+        compatments masses should be 2-dimentional of the form [[list of results for compatment 1], [list of results for compatment 2]]
+        defaults to []
+        :param times: TimeSeries corrosponding to the data the data in masses, defaults to having each Y element corrospond to a time step of 1
+        :type times: list, optional
+        :type list: list, optional
+        :param compatmentNames: list of names for the compatments, defaults to []
+        :type compatmentNames: list(, optional)
+        :param show: boolean to decide if the new data on the graph will automaticaly be displayed, defaults to True
+        :type show: boolean(, optional)
+        ...
+        :raises [ErrorType]: [ErrorDescription]
+        ...
+        :return: [ReturnDescription]
+        :rtype: [ReturnType]
+        """
+        self.compatmentNames=compatmentNames
+
+        masses = np.array(masses)  
+        newtimeseries = self.__makeTimeSeries(Timeseries, len(masses), t0=0)
+
+        if len(masses.shape) == 1:
+            masses = pd.DataFrame(data = [masses], columns=newtimeseries)
         else:
-            newData = pd.DataFrame(data = newData, columns=newtimeseries)
-
-
-
-        newData = newData.transpose()
-
-        self.currentData = pd.concat([self.currentData, newData], axis=1, sort=False)
-
-        self.show()
+            masses = pd.DataFrame(data = masses, columns=newtimeseries)
+        masses = masses.transpose()
+        self.currentData = pd.concat([self.currentData, masses], axis=1, sort=False)
+        
+        if show == True:
+            self.show()
     def show(self):
+        """display the graph containing currentdata
+
+        ...
+        :raises [ErrorType]: [ErrorDescription]
+        ...
+        :return: [ReturnDescription]
+        :rtype: [ReturnType]
+        """
 
         self.setupFig()
         self.fig = plt.plot(self.currentData)
@@ -67,3 +118,29 @@ class plot():
         else:
             unitsOutput = unitsInput
         return unitsOutput
+
+
+    def __makeTimeSeries(self, times, leny, t0=0):
+        """A class used for the graphical display of PK model results
+        :param Compartments: a list of compatments in the model (starting with Main followed by periferal comparments in order defined by model), defaults to ["Main", "1", "2", ... , "n"]
+        :type Compartments: list, optional
+        :param times: TimeSeries corrosponding to the data to graph, defaults to having each Y element corrospond to a time step of 1
+        :type times: list
+        :param leny: interger value of the length of thedata series to be plotted
+        :type leny: int
+        :param t0: start point of the time series if time is not explicitly provided in times, defaults to 0.0
+        :type t0: int
+        ...
+        :raises [ErrorType]: [ErrorDescription]
+        ...
+        :return: none
+        :rtype: none
+        """
+        if times != []:
+            timeSeries = times
+        else:
+            timeSeries = list(range(t0,leny))
+        return timeSeries
+
+graph = plot()  #initialise plot class
+graph.adddata([100,50,25,12,6,3,1,0.5],[0,2,4,6,8,10,12,14])  #add a single series as a list folowed by the time series
