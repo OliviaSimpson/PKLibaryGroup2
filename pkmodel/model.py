@@ -1,5 +1,6 @@
 class Model:
-    """A Pharmokinetic (PK) model
+    """A Pharmokinetic (PK) model that is composed of :class:`Compartment` objects. Minimally has a central compartment
+    but can have an arbitrary number of peripheral compartments additionally specified.
 
     Parameters
     ----------
@@ -44,7 +45,7 @@ class Compartment:
 
     :param volume: Specifies the volume of the compartment
     :type volume: float
-    :param rate: Speicifies the clearance rate if a central compartment, otherwise the transition rate
+    :param rate: Specifies the clearance rate if a central compartment, otherwise the transition rate
     :type rate: float
     :param type: The type of compartment, either central or peripheral
     :type type: str

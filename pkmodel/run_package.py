@@ -6,7 +6,7 @@ from PKLibaryGroup2.pkmodel.model import Model
 from PKLibaryGroup2.pkmodel.solve_arbitrary import Solution
 from PKLibaryGroup2.pkmodel.protocol import Protocol
 
-model = Model([[0, 1], [2, 4], [3, 5]],k_a=1)
+model = Model([[0, 1], [2, 4], [3, 5]])
 protocol = Protocol(3, 4)
 solution = Solution(model, protocol, [0, 1, 1000])
 
