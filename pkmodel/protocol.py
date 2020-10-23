@@ -1,8 +1,8 @@
 #
 # Protocol class
 #
+
 import math
-import numpy as np
 
 class Protocol:
     """A class to describe the dosing protocol and method of administration for the pharmacokinetic model.
@@ -18,24 +18,24 @@ class Protocol:
         self.d_g = d_g
         self.plan = plan
 
-    def dose(self):
-        if isinstance(self.plan, list) or isinstance(self.plan, tuple): # discrete administration
-            n_dose = len(self.plan)
+    def discrete(self, t, dose_time):
+        n_dose = len(self.plan)
+        sig = 1 / ((self.d_g / n_dose) * math.sqrt(2 * math.pi))
+        return (1 / sig * math.sqrt(2 * math.pi)) * math.exp(-0.5 * ((t - dose_time) ** 2 / (sig ** 2)))
 
-            sig = 1 / ((self.d_g / n_dose) * math.sqrt(2 * math.pi))
+    def dose(self, t):
+        if isinstance(self.plan, list) or isinstance(self.plan, tuple):
+            gaus = []
+            for dose_time in self.plan:
+                gaus.append(self.discrete(t, dose_time))
+            return sum(gaus)
 
-            gaussian = sum((1 / sig * math.sqrt(2 * math.pi)) * math.exp(-0.5 * ((t - dose_time) ** 2 / (sig ** 2))for dose_time in self.plan)
-            
-            return gaussian
-
-        elif isinstance(self.plan, int) or isinstance(self.plan, float): # continuous administration
+        elif isinstance(self.plan, int) or isinstance(self.plan, float):
             return self.d_g / self.plan
 
-        else:
-            raise TypeError('incorrect input format')
+protocol2 = Protocol(5, [1,2,3])
+print(protocol2.dose(1))
 
-protocol = Protocol(5, [1,2,3])
-
-
-        
+protocol3 = Protocol(5, 2)
+print(protocol3.dose(4))
 
