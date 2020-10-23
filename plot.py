@@ -1,3 +1,10 @@
+#format
+#graph = plot()  #initialise plot class
+#graph.adddata([100,50,25,12,6,3,1,0.5],[0,2,3,4,5,6,7,9])  #add a single series as a list folowed by the time series
+#graph.adddata([data],[timesereies]) 
+#graph.adddata([[1,2,3,5,8,13,21],[15,4,3,2,1,2,3]],[1,2,3,4,5,6,7]) #add two sets of data with a common time series
+#graph.adddata([[data1],[data2]],[timesereies]) 
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
