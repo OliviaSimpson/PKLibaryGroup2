@@ -1,8 +1,10 @@
 import unittest
 import pytest
-import pytest-mock
 import pkmodel as pk
 
+class Dummymodel:
+    q_p1 = 1.0
+    q
 
 class SolutionTest(unittest.TestCase):
     """
@@ -15,3 +17,4 @@ class SolutionTest(unittest.TestCase):
         model = pk.Solution()
         self.assertEqual(model.value, 44)
 
+        
