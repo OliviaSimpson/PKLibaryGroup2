@@ -31,7 +31,7 @@ class Solution:
         
         
     #test to see if subcutaneous or intravenous
-    
+    def rhsetup(self):
         if self.model.k_a == 0.0:
             
             if len(self.model.peripherals) == 0:
@@ -91,18 +91,17 @@ class Solution:
                     dqc_dt = self.model.k_a * self.q_p0 - self.q_c / self.model.v_c * self.model.cl - transition1 - transition2       #Rate of change of qc (in ng/h)
                     dqp1_dt = transition1                                     #Rate of change of qp1 (in ng/h) aka the quantity of drug in peripheral compartment
                     dqp2_dt = transition2
-                    return [dqc_dt, dqp0_dt, dqp1_dt, dqp2_dt]
-        
+                    return [dqc_dt, dqp0_dt, dqp1_dt, dqp2_dt], 
+            return lambda y, t: rhs(self, y,t)
     
     
-    def sol(self):
-        
+    def sol(self, rhsetup):
+        f = rhsetup()
         t_eval = np.linspace(self.timescale)
         sol = scipy.integrate.solve_ivp(
-            fun=lambda y, t: self.rhs(y, t),
+            fun= f,
             t_span=[t_eval[0], t_eval[-1]],
             y0=self.y0, t_eval=t_eval
             )
         return [sol.t, sol.y]
         
-a = sol()
