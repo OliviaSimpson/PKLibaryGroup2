@@ -39,19 +39,3 @@ class Protocol:
 
         else:
             raise TypeError('Incorrect input format')
-
-protocol = Protocol(5, 2)
-print(protocol.dose(3))
-
-protocol2 = Protocol(5, [1,2,3])
-print(protocol2.dose(1))
-print(protocol2.dose(1.5))
-print(protocol2.dose(2))
-print(protocol2.dose(2.5))
-print(protocol2.dose(3))
-print(protocol2.dose(3.5))
-print(protocol2.dose(4))
-
-protocol3 = Protocol(5, 'hi')
-print(protocol3.dose(4))
-
