@@ -9,10 +9,10 @@ Welcome to group2pklibary's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-   plot.py
-   pkmodel/model.py
-   pkmodel/protocol.py
-   pkmodel/soloution.py
+   plot
+   pkmodel/model
+   pkmodel/protocol
+   pkmodel/soloution
 
 
 
