@@ -1,10 +1,11 @@
 import unittest
 import pytest
+
 import pkmodel as pk
 
 class Dummymodel:
-    q_p1 = 1.0
-    q
+    k_a = 0
+    
 
 class SolutionTest(unittest.TestCase):
     """

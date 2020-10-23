@@ -26,6 +26,7 @@ class Solution:
         self.q_p0 = None
         self.q_p1 = None
         self.q_p2 = None
+        print(self.timescale)
         if type(self.timescale) != list:
              print('Timescale must be a list')
         
@@ -51,7 +52,8 @@ class Solution:
                     return [dqc_dt, dqp1_dt]
                 
             elif len(self.model.peripherals) == 2:
-                self.y0 = np.array([0.0,0.0,0.0])
+                self.y0 = np.array([0,0,0])
+                print(self.y0)
                 def rhs(self, y, t):               #Set up the right hand side of the ODE
                     self.q_c, self.q_p1, self.q_p2 = y
                     transition1 = self.model.Q_ps[0] * (self.q_c / self.model.v_c - self.q_p1 / self.model.v_ps[0])           #determines the transition rate (in ng/h)
@@ -92,12 +94,15 @@ class Solution:
                     dqp1_dt = transition1                                     #Rate of change of qp1 (in ng/h) aka the quantity of drug in peripheral compartment
                     dqp2_dt = transition2
                     return [dqc_dt, dqp0_dt, dqp1_dt, dqp2_dt], 
-            return lambda y, t: rhs(self, y,t)
+        return lambda t, y: rhs(self, y, t)
     
-    
-    def sol(self, rhsetup):
-        f = rhsetup()
-        t_eval = np.linspace(self.timescale)
+#print(self.y0)   
+    def sol(self):
+        f = self.rhsetup()
+        #print(f(3,4))
+        print(self.y0)
+        t_eval = np.linspace(self.timescale[0], self.timescale[1], self.timescale[2])
+        #print(t_eval)
         sol = scipy.integrate.solve_ivp(
             fun= f,
             t_span=[t_eval[0], t_eval[-1]],
