@@ -19,4 +19,3 @@ class ModelTest(unittest.TestCase):
         """
         model = pk.Model([[0, 1], [2, 4], [3, 5]])
         self.assertEqual(len(model.peripherals), 2)
-

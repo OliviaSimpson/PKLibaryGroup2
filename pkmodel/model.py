@@ -4,9 +4,9 @@ class Model:
     Parameters
     ----------
 
-    :param params: a 2D list or tuple containing the parameters for the compartments, with the first list/tuple being
+    :param params: A 2D list or tuple containing the parameters for the compartments, with the first list/tuple being
     the central compartment and the rest being the peripherals
-    :type params: list
+    :type params: list or tuple
     """
 
     def __init__(self, params):
