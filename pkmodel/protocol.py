@@ -32,10 +32,10 @@ class Protocol:
             return 0
 
         else:
-            n_dose = len(dose_times)
+            n_dose = len(self.dose_times)
             gaussians = []
-            a = self.n_dose / (self.d_g * math.sqrt(math.pi))
-            for time in dose_times:
+            a = n_dose / (self.d_g * math.sqrt(math.pi))
+            for time in self.dose_times:
                 gaussian = (1 / (a * math.sqrt(math.pi))) * math.exp(-(time / a) ** 2)
                 gaussians.append(gaussian)
             return gaussians
