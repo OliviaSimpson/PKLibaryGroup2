@@ -12,7 +12,7 @@ class Protocol:
     :param dur: the total duration of continuous infusion (hr)
     :type dur: float
     :param dose_times: the timing of administration of each bolus dose (hr)
-    :type n_dose: tuple
+    :type dose_times: tuple
     """
     
     def __init__(self, d_g, dur, dose_times):
