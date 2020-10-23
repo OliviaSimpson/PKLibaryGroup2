@@ -51,3 +51,4 @@ plt.legend()
 plt.ylabel('drug mass [ng]')
 plt.xlabel('time [h]')
 plt.show()
+return [sol.t, sol.y]
