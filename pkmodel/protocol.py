@@ -3,14 +3,17 @@
 #
 
 class Protocol:
-    """A Pharmokinetic (PK) protocol
+    """A class to describe the dosing protocol and method of administration for the pharmacokinetic model.
 
     Parameters
-    ----------
-
-    value: numeric, optional
-        an example paramter
-
+    :param d_g: the total quantity of drug to be administered over the entire protocol (ng)
+    :type d_g: float
+    :param dur: the total duration of continuous infusion (hr)
+    :type dur: float
+    :param n_dose: the number of doses to be administered in a discrete bolus protocol
+    :type n_dose: int
+    :param method: the method of administration (intravenous or subcutaneous)
+    :type method: string
     """
     
     def __init__(self, d_g, dur, plan, method):
