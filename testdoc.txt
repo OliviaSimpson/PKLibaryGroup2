@@ -1,2 +1,0 @@
-This is a test document created by Matthew Holland to see if his Git trials
-have been a success. 
