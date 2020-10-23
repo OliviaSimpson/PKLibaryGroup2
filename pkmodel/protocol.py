@@ -5,13 +5,17 @@
 import math
 
 class Protocol:
-    """A class to describe the dosing protocol and method of administration for the pharmacokinetic model.
+    """A class to describe the dosing protocol for the pharmacokinetic model.
+    Creates a dose(t) function to be called in the Solution class.
 
     Parameters
     :param d_g: the total quantity of drug to be administered over the entire protocol (ng)
     :type d_g: float
     :param plan: the duration of infusion (if continuous); the timings of each dose (if discrete)
     :type plan: list or tuple (if continuous); int or float (if discrete)
+
+    Raises
+    :Type error: if the dosing plan is in an incorrect input format (i.e. not a list/tuple or int/float)
     """
     
     def __init__(self, d_g, plan):
@@ -33,9 +37,21 @@ class Protocol:
         elif isinstance(self.plan, int) or isinstance(self.plan, float):
             return self.d_g / self.plan
 
+        else:
+            raise TypeError('Incorrect input format')
+
+protocol = Protocol(5, 2)
+print(protocol.dose(3))
+
 protocol2 = Protocol(5, [1,2,3])
 print(protocol2.dose(1))
+print(protocol2.dose(1.5))
+print(protocol2.dose(2))
+print(protocol2.dose(2.5))
+print(protocol2.dose(3))
+print(protocol2.dose(3.5))
+print(protocol2.dose(4))
 
-protocol3 = Protocol(5, 2)
+protocol3 = Protocol(5, 'hi')
 print(protocol3.dose(4))
 
