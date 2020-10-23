@@ -37,8 +37,8 @@ class Solution:
             dqc_dt = self.protocol.dose(t, X) - y[0] / v_c * cl  # define central compartment term
             for vi, Qi, i in v_ps, Q_ps, range(len(v_ps)):  # make a term for each peripheral
                 transitions.append(Qi * (y[0] / v_c - y[i] / vi))
-            for t in transitions:
-                dqc_dt -= t
+            for tr in transitions:
+                dqc_dt -= tr # subtract the peripherals from the s.c. central compartment
             return transitions.insert(0, dqc_dt)
 
         else:
@@ -46,8 +46,8 @@ class Solution:
             for vi, Qi, i in v_ps, Q_ps, range(len(v_ps)):  # make a term for each peripheral
                 transitions.append(Qi * (y[0] / v_c - y[i + 1] / vi))
             dqc_dt = self.model.k_a * y[1] - y[0] / v_c * cl # define central compartment term
-            for t in transitions:
-                dqc_dt -= t # subtract the peripherals from the s.c. central compartment
+            for tr in transitions:
+                dqc_dt -= tr  # subtract the peripherals from the s.c. central compartment
             transitions.insert(0,dqp0_dt)
             return transitions.insert(0, dqc_dt)
 
