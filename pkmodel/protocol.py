@@ -8,14 +8,14 @@ import math
 class Protocol:
 
     """A class to describe the dosing protocol for the pharmacokinetic model.
-    Protocol can consist of continuous infusion of pecified duration,
+    Protocol can consist of continuous infusion of specified duration,
     or discrete doses at stated time points.
     Creates a dose(t) function to be called in the Solution class.
 
     Parameters
     :param d_g: total quantity of drug administered (ng)
     :type d_g: float
-    :param plan: duration of infusion (ontinuous); dose timings (discrete)
+    :param plan: duration of infusion (continuous); dose timings (discrete)
     :type plan: int or float (continuous); list or tuple (discrete)
 
     Raises
