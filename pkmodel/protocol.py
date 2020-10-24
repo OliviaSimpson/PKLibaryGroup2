@@ -29,7 +29,7 @@ class Protocol:
     def discrete(self, t, dose_time):
         n_dose = len(self.plan)
         sig = 1 / ((self.d_g / n_dose) * math.sqrt(2 * math.pi))
-        return (1 / sig * math.sqrt(2 * math.pi)) * \
+        return (self.d_g / n_dose) * \
             math.exp(-0.5 * ((t - dose_time) ** 2 / (sig ** 2)))
 
     def dose(self, t):
@@ -37,7 +37,7 @@ class Protocol:
             gaus = []
             for dose_time in self.plan:
                 gaus.append(self.discrete(t, dose_time))
-            return sum(gaus) / len(self.plan) # I'm not sure about this line - returning just sum(gaus) means that dose(t) is p large
+            return sum(gaus)
 
         elif isinstance(self.plan, int) or isinstance(self.plan, float):
             return self.d_g / self.plan
