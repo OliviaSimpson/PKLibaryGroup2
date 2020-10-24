@@ -4,20 +4,24 @@
 
 import math
 
+
 class Protocol:
+
     """A class to describe the dosing protocol for the pharmacokinetic model.
+    Protocol can consist of continuous infusion of pecified duration,
+    or discrete doses at stated time points.
     Creates a dose(t) function to be called in the Solution class.
 
     Parameters
-    :param d_g: the total quantity of drug to be administered over the entire protocol (ng)
+    :param d_g: total quantity of drug administered (ng)
     :type d_g: float
-    :param plan: the duration of infusion (if continuous); the timings of each dose (if discrete)
-    :type plan: list or tuple (if continuous); int or float (if discrete)
+    :param plan: duration of infusion (ontinuous); dose timings (discrete)
+    :type plan: int or float (continuous); list or tuple (discrete)
 
     Raises
-    :Type error: if the dosing plan is in an incorrect input format (i.e. not a list/tuple or int/float)
+    :Type error: if the dosing plan is in incorrect input format
     """
-    
+
     def __init__(self, d_g, plan):
         self.d_g = d_g
         self.plan = plan
@@ -25,7 +29,8 @@ class Protocol:
     def discrete(self, t, dose_time):
         n_dose = len(self.plan)
         sig = 1 / ((self.d_g / n_dose) * math.sqrt(2 * math.pi))
-        return (1 / sig * math.sqrt(2 * math.pi)) * math.exp(-0.5 * ((t - dose_time) ** 2 / (sig ** 2)))
+        return (1 / sig * math.sqrt(2 * math.pi)) * \
+            math.exp(-0.5 * ((t - dose_time) ** 2 / (sig ** 2)))
 
     def dose(self, t):
         if isinstance(self.plan, list) or isinstance(self.plan, tuple):
