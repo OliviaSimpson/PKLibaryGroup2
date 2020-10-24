@@ -37,7 +37,7 @@ class Protocol:
             gaus = []
             for dose_time in self.plan:
                 gaus.append(self.discrete(t, dose_time))
-            return sum(gaus)
+            return sum(gaus) / len(self.plan) # I'm not sure about this line - returning just sum(gaus) means that dose(t) is p large
 
         elif isinstance(self.plan, int) or isinstance(self.plan, float):
             return self.d_g / self.plan
