@@ -25,14 +25,14 @@ class ProtocolTest(unittest.TestCase):
         Tests discrete dosing protocol with list.
         """
         model = pk.Protocol(7, [1,2,3])
-        self.assertEqual(model.dose(1), 2.33)
+        self.assertEqual(round(model.dose(1), 2), 2.33)
 
     def test_discrete_tuple(self):
         """
         Tests discrete dosing protocol with tuple.
         """
         model = pk.Protocol(5, (2,3,4))
-        self.assertEqual(model.dose(2), 1.67)
+        self.assertEqual(round(model.dose(2), 2), 1.67)
 
     def test_type_error(self):
         """
