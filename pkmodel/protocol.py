@@ -40,7 +40,10 @@ class Protocol:
             return sum(gaus)
 
         elif isinstance(self.plan, int) or isinstance(self.plan, float):
-            return self.d_g / self.plan
+            if t <= self.plan:
+                return self.d_g / self.plan
+            else:
+                return 0
 
         else:
             raise TypeError('Incorrect input format')
