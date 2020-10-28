@@ -18,7 +18,7 @@ class ProtocolTest(unittest.TestCase):
         Tests continuous dosing protocol with float value.
         """
         model = pk.Protocol(9, 2.25)
-        self.assertEqual(model.dose(3), 4)
+        self.assertEqual(model.dose(3), 0)
 
     def test_discrete_list(self):
         """
@@ -41,5 +41,4 @@ class ProtocolTest(unittest.TestCase):
         model = pk.Protocol(5, 'error test')
         
         with self.assertRaises(TypeError):
-            error_protocol = Protocol(7, 'error')
-            error_expected = error_protocol.dose(3)
+            error_protocol = pk.Protocol(7, 'error').dose(3)
